@@ -1,18 +1,17 @@
 {
-  "name": "yamahacontroller",
+  "name": "music-cast-yamaha-r-n602",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/test.js",
+    "lint": "eslint 'src/**/*.js'",
+    "lint-fix": "eslint --fix 'src/**/*.js'"
   },
   "author": "mimly",
   "license": "MIT",
-  "dependencies": {
-    "vue": "^2.6.10"
-  },
   "devDependencies": {
-    "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.0"
+    "eslint": "^7.12.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1"
   }
 }

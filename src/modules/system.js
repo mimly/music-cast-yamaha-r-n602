@@ -1,12 +1,11 @@
-const request = require('./request');
+const http = require('./http/request');
 
 module.exports = class System {
+  constructor(URL) {
+    this.URL = `${URL}/system`;
+  }
 
-    constructor(URL) {
-        this.URL = URL + '/system';
-    }
-
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -25,11 +24,11 @@ module.exports = class System {
      *
      * @returns {Promise<*>}
      */
-    async getDeviceInfo() {
-        return await request.get(this.URL + `/getDeviceInfo`);
-    }
+  getDeviceInfo() {
+    return http.get(`${this.URL}/getDeviceInfo`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -91,11 +90,11 @@ module.exports = class System {
      *
      * @returns {Promise<*>}
      */
-    async getFeatures() {
-        return await request.get(this.URL + `/getFeatures`);
-    }
+  getFeatures() {
+    return http.get(`${this.URL}/getFeatures`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -107,11 +106,11 @@ module.exports = class System {
      *
      * @returns {Promise<*>}
      */
-    async getFuncStatus() {
-        return await request.get(this.URL + `/getFuncStatus`);
-    }
+  getFuncStatus() {
+    return http.get(`${this.URL}/getFuncStatus`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -122,11 +121,11 @@ module.exports = class System {
      *
      * @returns {Promise<*>}
      */
-    async getLocationInfo() {
-        return await request.get(this.URL + `/getLocationInfo`);
-    }
+  getLocationInfo() {
+    return http.get(`${this.URL}/getLocationInfo`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -160,11 +159,11 @@ module.exports = class System {
      *
      * @returns {Promise<*>}
      */
-    async getNameText() {
-        return await request.get(this.URL + `/getNameText`);
-    }
+  getNameText() {
+    return http.get(`${this.URL}/getNameText`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -173,11 +172,11 @@ module.exports = class System {
      *
      * @returns {Promise<*>}
      */
-    async getNetworkStandby() {
-        return await request.get(this.URL + `/getNetworkStandby`);
-    }
+  getNetworkStandby() {
+    return http.get(`${this.URL}/getNetworkStandby`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -209,11 +208,11 @@ module.exports = class System {
      * }
      * @returns {Promise<*>}
      */
-    async getTag() {
-        return await request.get(this.URL + `/getTag`);
-    }
+  getTag() {
+    return http.get(`${this.URL}/getTag`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -222,11 +221,11 @@ module.exports = class System {
      *
      * @returns {Promise<*>}
      */
-    async isNewFirmwareAvailable() {
-        return await request.get(this.URL + `/isNewFirmwareAvailable?type=network`);
-    }
+  isNewFirmwareAvailable() {
+    return http.get(`${this.URL}/isNewFirmwareAvailable?type=network`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -235,8 +234,7 @@ module.exports = class System {
      * @param bool
      * @returns {Promise<*>}
      */
-    async setAutoPowerStandby(bool) {
-        return await request.get(this.URL + `/setAutoPowerStandby?enable=${bool}`);
-    }
-
+  setAutoPowerStandby(bool) {
+    return http.get(`${this.URL}/setAutoPowerStandby?enable=${bool}`);
+  }
 };

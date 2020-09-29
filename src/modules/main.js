@@ -1,12 +1,11 @@
-const request = require('./request');
+const http = require('./http/request');
 
 module.exports = class Main {
+  constructor(URL) {
+    this.URL = `${URL}/main`;
+  }
 
-    constructor(URL) {
-        this.URL = URL + '/main';
-    }
-
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -15,11 +14,11 @@ module.exports = class Main {
      *
      * @returns {Promise<*>}
      */
-    async getSignalInfo() {
-        return await request.get(this.URL + `/getSignalInfo`);
-    }
+  getSignalInfo() {
+    return http.get(`${this.URL}/getSignalInfo`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -37,11 +36,11 @@ module.exports = class Main {
      *
      * @returns {Promise<*>}
      */
-    async getStatus() {
-        return await request.get(this.URL + `/getStatus`);
-    }
+  getStatus() {
+    return http.get(`${this.URL}/getStatus`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -50,11 +49,11 @@ module.exports = class Main {
      * @param input ( optical1 | net_radio | server | ... )
      * @returns {Promise<*>}
      */
-    async prepareInputChange(input='server') {
-        return await request.get(this.URL + `/prepareInputChange?input=${input}`);
-    }
+  prepareInputChange(input = 'server') {
+    return http.get(`${this.URL}/prepareInputChange?input=${input}`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -64,11 +63,11 @@ module.exports = class Main {
      * @param mode (autoplay_disabled | ??? )
      * @returns {Promise<*>}
      */
-    async setInput(input='server', mode='autoplay_disabled') {
-        return await request.get(this.URL + `/setInput?input=${input}&mode=${mode}`);
-    }
+  setInput(input = 'server', mode = 'autoplay_disabled') {
+    return http.get(`${this.URL}/setInput?input=${input}&mode=${mode}`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -77,11 +76,11 @@ module.exports = class Main {
      * @param mode ( compressed | uncompressed )
      * @returns {Promise<*>}
      */
-    async setLinkAudioQuality(mode='uncompressed') {
-        return await request.get(this.URL + `/setLinkAudioQuality?mode=${mode}`);
-    }
+  setLinkAudioQuality(mode = 'uncompressed') {
+    return http.get(`${this.URL}/setLinkAudioQuality?mode=${mode}`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -90,11 +89,11 @@ module.exports = class Main {
      * @param control ( speed | standard | stability )
      * @returns {Promise<*>}
      */
-    async setLinkControl(control='standard') {
-        return await request.get(this.URL + `/setLinkControl?control=${control}`);
-    }
+  setLinkControl(control = 'standard') {
+    return http.get(`${this.URL}/setLinkControl?control=${control}`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -103,11 +102,11 @@ module.exports = class Main {
      * @param bool
      * @returns {Promise<*>}
      */
-    async setMute(bool='true') {
-        return await request.get(this.URL + `/setMute?enable=${bool}`);
-    }
+  setMute(bool = 'true') {
+    return http.get(`${this.URL}/setMute?enable=${bool}`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -116,11 +115,11 @@ module.exports = class Main {
      * @param power ( on | standby )
      * @returns {Promise<*>}
      */
-    async setPower(power='standby') {
-        return await request.get(this.URL + `/setPower?power=${power}`);
-    }
+  setPower(power = 'standby') {
+    return http.get(`${this.URL}/setPower?power=${power}`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -129,8 +128,7 @@ module.exports = class Main {
      * @param volume
      * @returns {Promise<*>}
      */
-    async setVolume(volume='79') {
-        return await request.get(this.URL + `/setVolume?volume=${volume}`);
-    }
-
+  setVolume(volume = '79') {
+    return http.get(`${this.URL}/setVolume?volume=${volume}`);
+  }
 };

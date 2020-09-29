@@ -1,12 +1,11 @@
-const request = require('./request');
+const http = require('./http/request');
 
 module.exports = class Dist {
+  constructor(URL) {
+    this.URL = `${URL}/dist`;
+  }
 
-    constructor(URL) {
-        this.URL = URL + '/dist';
-    }
-
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -19,8 +18,7 @@ module.exports = class Dist {
      *
      * @returns {Promise<*>}
      */
-    async getDistributionInfo() {
-        return await request.get(this.URL + `/getDistributionInfo`);
-    }
-
+  getDistributionInfo() {
+    return http.get(`${this.URL}/getDistributionInfo`);
+  }
 };

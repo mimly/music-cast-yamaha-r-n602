@@ -1,12 +1,11 @@
-const request = require('./request');
+const http = require('./http/request');
 
 module.exports = class Netusb {
+  constructor(URL) {
+    this.URL = `${URL}/netusb`;
+  }
 
-    constructor(URL) {
-        this.URL = URL + '/netusb';
-    }
-
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -15,11 +14,11 @@ module.exports = class Netusb {
      * @param index
      * @returns {Promise<*>}
      */
-    async copyPlayQueue(index='0') {
-        return await request.get(this.URL + `/copyPlayQueue?index=${index}`);
-    }
+  copyPlayQueue(index = '0') {
+    return http.get(`${this.URL}/copyPlayQueue?index=${index}`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -42,11 +41,11 @@ module.exports = class Netusb {
      * @param size (of list_info)
      * @returns {Promise<*>}
      */
-    async getListInfo(input='server', index='0', size='8') {
-        return await request.get(this.URL + `/getListInfo?list_id=main&input=${input}&index=${index}&size=${size}&lang=en`);
-    }
+  getListInfo(input = 'server', index = '0', size = '8') {
+    return http.get(`${this.URL}/getListInfo?list_id=main&input=${input}&index=${index}&size=${size}&lang=en`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -63,11 +62,11 @@ module.exports = class Netusb {
      * @param index ???
      * @returns {Promise<*>}
      */
-    async getMcPlaylistName(bank='0', index='0') {
-        return await request.get(this.URL + `/getMcPlaylistName?bank=${bank}&index=${index}`);
-    }
+  getMcPlaylistName(bank = '0', index = '0') {
+    return http.get(`${this.URL}/getMcPlaylistName?bank=${bank}&index=${index}`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -92,11 +91,11 @@ module.exports = class Netusb {
      *
      * @returns {Promise<*>}
      */
-    async getPlayInfo() {
-        return await request.get(this.URL + `/getPlayInfo`);
-    }
+  getPlayInfo() {
+    return http.get(`${this.URL}/getPlayInfo`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -110,16 +109,16 @@ module.exports = class Netusb {
      * @param index (negative or 8n, i.e. 0, 8, 16 etc.)
      * @returns {Promise<*>}
      */
-    async getPlayQueue(index='0') {
-        return await request.get(this.URL + `/getPlayQueue?index=${index}`);
-    }
+  getPlayQueue(index = '0') {
+    return http.get(`${this.URL}/getPlayQueue?index=${index}`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
      *  preset_info: [
-     *      { input: 'net_radio', text: 'Radio Plus Gdansk', attribute: 0 },
+     *      { input: 'net_radio', text: 'Radio Plus', attribute: 0 },
      *      { input: 'net_radio', text: 'Polskie Radio Jedynka', attribute: 0 }
      *      ...
      *      { input: 'unknown', text: '' }
@@ -130,11 +129,11 @@ module.exports = class Netusb {
      * @param band
      * @returns {Promise<*>}
      */
-    async getPresetInfo(band='common') {
-        return await request.get(this.URL + `/getPresetInfo?band=${band}`);
-    }
+  getPresetInfo(band = 'common') {
+    return http.get(`${this.URL}/getPresetInfo?band=${band}`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -142,17 +141,17 @@ module.exports = class Netusb {
      *      { input: 'server', text: 'Man Made Paradise', albumart_url: '', play_count: 1, attribute: 30 },
      *      { input: 'server', text: 'Mr. Bad Guy', albumart_url: '', play_count: 1, attribute: 30 },
      *      ...
-     *      { input: 'server', text: 'Freddie Mercury - Barcelona - Side 2', albumart_url: '', play_count: 1, attribute: 30 }
+     *      { input: 'server', text: 'Barcelona', albumart_url: '', play_count: 1, attribute: 30 }
      *  ]
      * }
      *
      * @returns {Promise<*>}
      */
-    async getRecentInfo() {
-        return await request.get(this.URL + `/getRecentInfo`);
-    }
+  getRecentInfo() {
+    return http.get(`${this.URL}/getRecentInfo`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0,
@@ -169,11 +168,11 @@ module.exports = class Netusb {
      *
      * @returns {Promise<*>}
      */
-    async getStreamingServiceSettings() {
-        return await request.get(this.URL + `/getStreamingServiceSettings`);
-    }
+  getStreamingServiceSettings() {
+    return http.get(`${this.URL}/getStreamingServiceSettings`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -183,11 +182,11 @@ module.exports = class Netusb {
      * @param index
      * @returns {Promise<*>}
      */
-    async manageList(type='play_next', index='0') {
-        return await request.get(this.URL + `/manageList?list_id=main&type=${type}&index=${index}&timeout=60000&zone=main`);
-    }
+  manageList(type = 'play_next', index = '0') {
+    return http.get(`${this.URL}/manageList?list_id=main&type=${type}&index=${index}&timeout=60000&zone=main`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -197,11 +196,11 @@ module.exports = class Netusb {
      * @param index
      * @returns {Promise<*>}
      */
-    async managePlayQueue(type='remove', index='0') {
-        return await request.get(this.URL + `/managePlayQueue?type=${type}&index=${index}&zone=main`);
-    }
+  managePlayQueue(type = 'remove', index = '0') {
+    return http.get(`${this.URL}/managePlayQueue?type=${type}&index=${index}&zone=main`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -211,11 +210,11 @@ module.exports = class Netusb {
      * @param to
      * @returns {Promise<*>}
      */
-    async movePlayQueueItem(from, to) {
-        return await request.get(this.URL + `/movePlayQueueItem?from=${from}&to=${to}`);
-    }
+  movePlayQueueItem(from, to) {
+    return http.get(`${this.URL}/movePlayQueueItem?from=${from}&to=${to}`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -225,11 +224,11 @@ module.exports = class Netusb {
      * @param index
      * @returns {Promise<*>}
      */
-    async setListControl(type='select', index='0') {
-        return await request.get(this.URL + `/setListControl?type=${type}&index=${index}&zone=main`);
-    }
+  setListControl(type = 'select', index = '0') {
+    return http.get(`${this.URL}/setListControl?type=${type}&index=${index}&zone=main`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -238,11 +237,11 @@ module.exports = class Netusb {
      * @param playback ( play | pause | next | previous )
      * @returns {Promise<*>}
      */
-    async setPlayback(playback='play') {
-        return await request.get(this.URL + `/setPlayback?playback=${playback}`);
-    }
+  setPlayback(playback = 'play') {
+    return http.get(`${this.URL}/setPlayback?playback=${playback}`);
+  }
 
-    /**
+  /**
      * Returns JSON object like this:
      * {
      *  response_code: 0
@@ -251,8 +250,7 @@ module.exports = class Netusb {
      * @param bool ( use streaming services like NetRadio )
      * @returns {Promise<*>}
      */
-    async setStreamingServiceOption(bool='true') {
-        return await request.get(this.URL + `/setStreamingServiceOption?use_service=${bool}`);
-    }
-    
+  setStreamingServiceOption(bool = 'true') {
+    return http.get(`${this.URL}/setStreamingServiceOption?use_service=${bool}`);
+  }
 };
